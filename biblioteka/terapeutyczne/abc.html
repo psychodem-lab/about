@@ -1,1 +1,292 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model 5 Obszarów (CBT) - Responsywny</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        :root {
+            --col-situation: #6c757d; /* Szary */
+            --col-thoughts: #007bff;  /* Niebieski */
+            --col-emotions: #e83e8c;  /* Różowy */
+            --col-body: #28a745;      /* Zielony */
+            --col-behavior: #fd7e14;  /* Pomarańczowy */
+            --bg-color: #f4f6f8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+          .logo-wrapper {
+            text-align: center; 
+            margin-bottom: 20px; 
+        }
+.logo-wrapper a {
+            text-decoration: none;
+            border: none;
+        }
+
+        .logo-wrapper img {
+            max-height: 100px; 
+            width: auto;
+            display: inline-block;
+            margin-top: 0; 
+            border: 0;
+        }
+
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        h1 { margin: 0; font-size: 24px; }
+        p.subtitle { margin: 5px 0 0; color: #666; font-size: 14px; }
+
+        /* --- DEKLARACJA STYLÓW DLA DESKTOPU (Default) --- */
+        
+        .diagram-wrapper {
+            position: relative;
+            width: 900px;
+            height: 680px; 
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            /* Ustawienie domyślne dla desktopu */
+        }
+
+        .card {
+            position: absolute; /* Domyślne dla desktopu */
+            width: 250px;
+            height: 150px;
+            background: #fff;
+            border-left: 6px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 10;
+        }
+
+        .card:hover, .card:focus-within {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+            z-index: 20;
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        .card-content {
+            flex-grow: 1;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .card-content[data-placeholder]:empty:before {
+            content: attr(data-placeholder);
+            color: #aaa;
+            font-style: italic;
+            pointer-events: none;
+        }
+
+        /* --- POZYCJONOWANIE DESKTOP --- */
+        .card-situation { top: 40px; left: 50%; transform: translateX(-50%); border-color: var(--col-situation); }
+        .card-situation h3 { color: var(--col-situation); }
+
+        .card-thoughts { top: 230px; left: 50%; transform: translateX(-50%); width: 300px; height: 160px; border-color: var(--col-thoughts); background-color: #fbfdff; }
+        .card-thoughts h3 { color: var(--col-thoughts); }
+
+        .card-behavior { top: 450px; left: 60px; border-color: var(--col-behavior); }
+        .card-behavior h3 { color: var(--col-behavior); }
+
+        .card-body { top: 450px; right: 60px; border-color: var(--col-body); }
+        .card-body h3 { color: var(--col-body); }
+
+        .card-emotions { top: 500px; left: 50%; transform: translateX(-50%); border-color: var(--col-emotions); width: 260px; }
+        .card-emotions h3 { color: var(--col-emotions); }
+
+        .actions { margin-top: 20px; }
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: inherit;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #555; }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .diagram-wrapper { box-shadow: none; border: 1px solid #ddd; height: auto; padding-bottom: 50px;}
+            .actions, header p { display: none; }
+        }
+
+        /* --- MEDIA QUERY DLA URZĄDZEŃ MOBILNYCH (max-width: 768px) --- */
+        @media screen and (max-width: 768px) {
+            
+            body { padding: 10px; }
+            header { margin-bottom: 10px; }
+
+            /* 1. Kontener (Przygotowanie do Stackingu) */
+            .diagram-wrapper {
+                width: 100%; /* Pełna szerokość */
+                min-height: auto;
+                height: auto !important; /* Usuń stałą wysokość */
+                box-shadow: none; 
+                background: none;
+                padding: 0;
+                
+                /* Użyj Flexbox do ułożenia kart w stos */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px; /* Odstępy między kartami */
+            }
+
+            /* 2. Karty (Zmiana Pozycjonowania i Rozmiaru) */
+            .card {
+                position: static !important; /* KLUCZOWE: zablokuj pozycjonowanie absolutne */
+                width: 95% !important; /* Prawie pełna szerokość wewnątrz kontenera */
+                margin: 0;
+                transform: none !important; /* Usuń wszystkie transformacje */
+                min-height: 100px; /* Minimalna wysokość, by zawartość była widoczna */
+                height: auto; /* Wysokość dopasowuje się do treści */
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Delikatniejszy cień */
+                border-radius: 12px;
+                padding: 15px;
+            }
+
+            /* 3. Usuwamy transformacje z hovera na mobile, żeby uniknąć błędów */
+            .card:hover, .card:focus-within {
+                transform: none;
+            }
+
+            /* 4. Resetujemy style szerokości/kolorów specyficzne dla pozycji desktopowej */
+            .card-thoughts, .card-emotions {
+                width: 95% !important; /* Zapewnienie pełnej szerokości */
+                left: auto !important;
+                right: auto !important;
+            }
+
+        }
+    </style>
+</head>
+<body>
+ <div class="logo-wrapper">
+            <a href="index.html" title="Powrót do strony głównej">
+                <img src="logo.png" alt="Psychodem">
+            </a></div>
+    <header>
+        <h1>Model 5 Obszarów (CBT)</h1>
+        <p class="subtitle">Wypełnij, aby zrozumieć powiązania między sytuacją a Twoimi reakcjami.</p>
+    </header>
+ <div class="nav-bar">
+            <a href="index.html" class="nav-link">Strona główna</a>
+        </div> <br>
+    <div class="diagram-wrapper">
+        
+        <div class="card card-situation">
+            <h3>Sytuacja / Bodziec</h3>
+            <div class="card-content" contenteditable="true" data-placeholder="Co się stało? Gdzie byłeś? Z kim? (Tylko fakty)"></div>
+        </div>
+
+        <div class="card card-thoughts">
+            <h3>Myśli Automatyczne</h3>
+            <div class="card-content" contenteditable="true" data-placeholder="Co przemknęło Ci przez głowę? Jak to zinterpretowałeś?"></div>
+        </div>
+
+        <div class="card card-behavior">
+            <h3>Zachowanie</h3>
+            <div class="card-content" contenteditable="true" data-placeholder="Co zrobiłeś? Czego uniknąłeś?"></div>
+        </div>
+
+        <div class="card card-body">
+            <h3>Reakcje z Ciała</h3>
+            <div class="card-content" contenteditable="true" data-placeholder="Co poczułeś w ciele? (serce, oddech, napięcie)"></div>
+        </div>
+
+        <div class="card card-emotions">
+            <h3>Emocje</h3>
+            <div class="card-content" contenteditable="true" data-placeholder="Nazwij emocje (np. lęk, smutek, złość)."></div>
+        </div>
+
+    </div>
+
+    <div class="actions">
+        <button onclick="window.print()">Drukuj / Zapisz jako PDF</button>
+    </div>
+
+    <script>
+        // --- Skrypt dopasowujący rozmiar tekstu ---
+        const contents = document.querySelectorAll('.card-content');
+
+        contents.forEach(el => {
+            const adjustFont = () => {
+                let size = 14; 
+                el.style.fontSize = size + 'px';
+                
+                // Zmniejszaj tekst jeśli nie mieści się w pudełku
+                while (el.scrollHeight > el.clientHeight && size > 9) {
+                    size--;
+                    el.style.fontSize = size + 'px';
+                }
+            };
+
+            el.addEventListener('input', adjustFont);
+            
+            // Obsługa wklejania (czyszczenie formatowania)
+            el.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text');
+                document.execCommand("insertHTML", false, text);
+                adjustFont();
+            });
+            
+            // Initial adjustment (ważne przy responsywności)
+            adjustFont();
+        });
+        
+        // Ponowne dopasowanie przy zmianie orientacji/rozmiaru okna
+        window.addEventListener('resize', () => {
+             contents.forEach(el => {
+                el.style.fontSize = '14px'; // Reset przed ponownym obliczeniem
+                const event = new Event('input');
+                el.dispatchEvent(event);
+            });
+        });
+    </script>
+
+</body>
+</html>
 
