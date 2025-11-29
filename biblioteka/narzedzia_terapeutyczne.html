@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narzędzia Terapeutyczne CBT - Biblioteka Psychologiczna</title>
+    <style>
+        :root {
+            --primary-color: #00796B; /* Głęboka, szlachetna zieleń */
+            --secondary-color: #E0F2F1; /* Bardzo jasny, miętowy akcent */
+            --text-color: #333333;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Nagłówek --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        /* --- Kontener Główny --- */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* --- Układ Siatki (Grid) dla Narzędzi --- */
+        .tools-grid {
+            display: grid;
+            /* 3 kolumny na dużych ekranach */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .tool-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: left;
+            border-top: 5px solid var(--primary-color); /* Akcent kolorystyczny */
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px); /* Efekt uniesienia */
+            box-shadow: var(--shadow-hover);
+        }
+
+        .tool-card h3 {
+            color: #004D40;
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .tool-card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px dotted var(--primary-color);
+            padding-bottom: 2px;
+            transition: color 0.3s;
+        }
+        .tool-card a:hover {
+            color: #004D40;
+            border-bottom-style: solid;
+        }
+        
+        /* --- Link Powrotny --- */
+        .back-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .back-link a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🛠️ Narzędzia Terapeutyczne CBT</h1>
+        <p>Praktyczne techniki i arkusze pracy dla Twojego rozwoju poznawczo-behawioralnego.</p>
+    </header>
+
+    <div class="container">
+        <h2>Wybrane techniki i ćwiczenia</h2>
+        <p class="intro-text">Oto zestawienie najczęściej używanych i najbardziej skutecznych narzędzi w psychoterapii poznawczo-behawioralnej. Możesz je wykorzystać do samodzielnej pracy nad myślami, emocjami i zachowaniami.</p>
+
+        <ul class="tools-grid">
+            
+            <li class="tool-card">
+                <h3>Dziennik Myśli (Arkusz CBT)</h3>
+                <p>Narzędzie do systematycznego identyfikowania automatycznych myśli, oceniania ich prawdziwości i generowania bardziej adaptacyjnych reakcji. Podstawa pracy nad zniekształceniami poznawczymi.</p>
+                <a href="dziennik_mysli.html">Pobierz Arkusz &rarr;</a>
+            </li>
+
+            <li class="tool-card">
+                <h3>Eksperymenty Behawioralne</h3>
+                <p>Polegają na weryfikacji negatywnych przekonań poprzez celowe zaplanowanie i przeprowadzenie działania w realnym świecie. Doskonałe na lęk i unikanie. (Np. sprawdzenie, czy faktycznie "zawsze" idzie źle).</p>
+                <a href="eksperymenty_behawioralne.html">Zobacz Przykład &rarr;</a>
+            </li>
+
+            <li class="tool-card">
+                <h3>Planowanie Aktywności i Wzmocnienia</h3>
+                <p>Metoda szczególnie przydatna w pracy z depresją i prokrastynacją. Polega na cotygodniowym planowaniu czynności dających poczucie przyjemności lub osiągnięcia. Zwiększa motywację.</p>
+                <a href="planowanie_aktywnosci.html">Pobierz Szablon &rarr;</a>
+            </li>
+            
+            <li class="tool-card">
+                <h3>Technika Ekspozycji (Stopniowa)</h3>
+                <p>Stosowana głównie w zaburzeniach lękowych i fobiach. Polega na kontrolowanym i stopniowym wystawianiu się na bodziec wywołujący lęk, prowadząc do habituacji i redukcji reakcji lękowej.</p>
+                <a href="ekspozycja.html">Dowiedz się więcej &rarr;</a>
+            </li>
+
+            <li class="tool-card">
+                <h3>Technika Strzałki w Dół</h3>
+                <p>Pytania "co to dla mnie oznacza?" prowadzone w dół, mające na celu dotarcie od automatycznej myśli do głębokiego, bazowego przekonania o sobie, świecie lub przyszłości. Klucz do zmian na poziomie schematów.</p>
+                <a href="strzalka_w_dol.html">Instrukcja Krok po Kroku &rarr;</a>
+            </li>
+
+            <li class="tool-card">
+                <h3>Trening Relaksacji Mięśniowej Jacobsona</h3>
+                <p>Praktyczne ćwiczenie polegające na napinaniu, a następnie rozluźnianiu różnych grup mięśniowych. Pomaga w redukcji napięcia fizycznego i lepszym rozpoznawaniu stresu w ciele.</p>
+                <a href="relaksacja_jacobsona.html">Odtwórz Nagranie &rarr;</a>
+            </li>
+
+        </ul>
+
+        <div class="back-link">
+            <a href="biblioteka.html">&leftarrow; Wróć do Biblioteki Psychologicznej</a>
+        </div>
+    </div>
+
+</body>
+</html>
