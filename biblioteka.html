@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteka Psychologiczna</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50; /* Zielony */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #4CAF50; /* Zielony */
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex; /* Układ elementów w rzędzie/siatce */
+            flex-wrap: wrap; /* Zawijanie w kolejny wiersz */
+            justify-content: center;
+        }
+        ul li {
+            background-color: #E8F5E9; /* Jasny zielony box */
+            margin: 10px;
+            padding: 20px;
+            width: 250px; /* Stała szerokość boxa */
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        ul li:hover {
+            transform: translateY(-5px); /* Efekt uniesienia przy najechaniu */
+        }
+        ul li a {
+            text-decoration: none;
+            color: #1B5E20; /* Ciemniejszy zielony */
+            font-weight: bold;
+            display: block;
+            font-size: 1.1em;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Biblioteka Psychologiczna</h1>
+        <p>Zasoby, narzędzia i wiedza dla Twojego rozwoju.</p>
+    </header>
+
+    <div class="container">
+        <h2>Kategorie Zasobów</h2>
+
+        <ul>
+            <li><a href="trening_oddechowy.html">🌬️ Trening oddechowy</a></li>
+            <li><a href="trening_poznawczy.html">🧠 Trening poznawczy</a></li>
+            <li><a href="narzedzia_terapeutyczne.html">🛠️ Narzędzia terapeutyczne</a></li>
+            <li><a href="polecane_linki.html">🔗 Polecane linki</a></li>
+            <li><a href="polecana_literatura.html">📚 Polecana literatura</a></li>
+            <li><a href="artykuly.html">📰 Artykuły</a></li>
+        </ul>
+
+        <div class="back-link">
+            <a href="index.html">&leftarrow; Wróć na Stronę Główną</a>
+        </div>
+    </div>
+
+</body>
+</html>
