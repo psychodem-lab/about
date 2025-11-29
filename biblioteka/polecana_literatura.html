@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polecana Literatura - Biblioteka Psychologiczna</title>
+    <style>
+        :root {
+            --primary-color: #00796B; /* Głęboka, szlachetna zieleń */
+            --secondary-color: #E0F2F1; /* Bardzo jasny, miętowy akcent */
+            --text-color: #333333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Nagłówek --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        /* --- Kontener Główny --- */
+        .container {
+            width: 90%;
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-align: left;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+            font-size: 1.8em;
+            margin-top: 40px;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.05em;
+            color: #555;
+        }
+
+        /* --- Lista Książek (Karty) --- */
+        .book-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr; /* Lista w jednej kolumnie */
+            gap: 20px;
+        }
+
+        .book-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; /* Użycie Flexbox dla układu z lewą ikoną */
+            align-items: flex-start;
+        }
+
+        .book-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .book-icon {
+            font-size: 3em;
+            color: #4CAF50; /* Klasyczny zielony dla ikony */
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .book-content {
+            flex-grow: 1;
+        }
+
+        .book-content h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.3em;
+            color: #004D40;
+            font-weight: 600;
+        }
+
+        .book-author {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .book-content p {
+            font-size: 0.95em;
+            color: var(--text-color);
+        }
+
+        .buy-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .buy-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* --- Link Powrotny --- */
+        .back-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .back-link a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📖 Polecana Literatura</h1>
+        <p>Książki, które pomogą Ci pogłębić wiedzę i wesprą Twój rozwój osobisty.</p>
+    </header>
+
+    <div class="container">
+        <p class="intro-text">Poniżej znajdziesz wyselekcjonowaną przez nas listę najważniejszych publikacji z dziedziny psychologii i samopomocy, z podziałem na kluczowe kategorie.</p>
+
+        <h2>Poradniki i Samopomoc</h2>
+
+        <ul class="book-list">
+            
+            <li class="book-card">
+                <div class="book-icon">📘</div>
+                <div class="book-content">
+                    <h3>"Pułapki myślenia. O myśleniu szybkim i wolnym"</h3>
+                    <span class="book-author">Daniel Kahneman</span>
+                    <p>Klasyk o mechanizmach podejmowania decyzji, błędach poznawczych i sposobie działania naszego umysłu. Obowiązkowa lektura dla każdego, kto interesuje się CBT i racjonalnym myśleniem.</p>
+                    <a href="https://przykładowy-sklep.pl/ksiazka1" target="_blank" class="buy-link">Kup teraz / Zobacz recenzję</a>
+                </div>
+            </li>
+
+            <li class="book-card">
+                <div class="book-icon">📗</div>
+                <div class="book-content">
+                    <h3>"Uważność. Trening mentalny"</h3>
+                    <span class="book-author">Jon Kabat-Zinn</span>
+                    <p>Podstawowy przewodnik po Mindfulness. Pomaga zrozumieć, jak żyć chwilą obecną, redukować stres i akceptować trudne emocje. Świetne uzupełnienie terapii poznawczej.</p>
+                    <a href="https://przykładowy-sklep.pl/ksiazka2" target="_blank" class="buy-link">Kup teraz / Zobacz recenzję</a>
+                </div>
+            </li>
+        </ul>
+
+        <h2>Literatura Fachowa i Teoretyczna</h2>
+
+        <ul class="book-list">
+            
+            <li class="book-card">
+                <div class="book-icon">📕</div>
+                <div class="book-content">
+                    <h3>"Terapia poznawcza i jej stosowanie"</h3>
+                    <span class="book-author">Aaron T. Beck</span>
+                    <p>Podręcznik dla profesjonalistów i osób głęboko zainteresowanych korzeniami CBT. Wyjaśnia teoretyczne podstawy modelu poznawczego i techniki interwencji.</p>
+                    <a href="https://przykładowy-sklep.pl/ksiazka3" target="_blank" class="buy-link">Kup teraz / Zobacz recenzję</a>
+                </div>
+            </li>
+
+            <li class="book-card">
+                <div class="book-icon">📙</div>
+                <div class="book-content">
+                    <h3>"Jak zmienić swoje życie, wykorzystując T.E.R.A.P.I.Ę."</h3>
+                    <span class="book-author">Jeffrey E. Young</span>
+                    <p>Wprowadzenie do Terapii Schematów – zaawansowanego modelu CBT. Idealna, gdy tradycyjne podejścia nie przynoszą wystarczających rezultatów.</p>
+                    <a href="https://przykładowy-sklep.pl/ksiazka4" target="_blank" class="buy-link">Kup teraz / Zobacz recenzję</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="back-link">
+            <a href="biblioteka.html">&leftarrow; Wróć do Biblioteki Psychologicznej</a>
+        </div>
+    </div>
+
+</body>
+</html>
