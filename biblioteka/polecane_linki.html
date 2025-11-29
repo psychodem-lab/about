@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polecane Linki - Biblioteka Psychologiczna</title>
+    <style>
+        :root {
+            --primary-color: #00796B; /* Głęboka, szlachetna zieleń */
+            --secondary-color: #E0F2F1; /* Bardzo jasny, miętowy akcent */
+            --text-color: #333333;
+            --shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Nagłówek --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        /* --- Kontener Główny --- */
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.05em;
+            color: #555;
+        }
+
+        /* --- Lista Linków (Karty) --- */
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .link-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: flex; /* Użycie Flexbox dla lepszego układu wewnątrz karty */
+            align-items: center;
+        }
+
+        .link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px; /* Kompensacja, by zachować równy padding */
+        }
+        
+        .link-icon {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-right: 20px;
+            flex-shrink: 0; /* Zapobiega zmniejszaniu się ikony */
+        }
+
+        .link-content {
+            flex-grow: 1;
+        }
+
+        .link-content h3 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .link-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .link-content a:hover {
+            color: #004D40;
+            text-decoration: underline;
+        }
+
+        .link-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* --- Link Powrotny --- */
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .back-link a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🔗 Polecane Linki i Zasoby</h1>
+        <p>Sprawdzone źródła informacji i wartościowe strony zewnętrzne.</p>
+    </header>
+
+    <div class="container">
+        <h2>Wybrane przez naszych terapeutów</h2>
+        <p class="intro-text">Poniżej znajdziesz listę stron, organizacji i narzędzi, które uważamy za godne zaufania i pomocne w rozwoju psychicznym.</p>
+
+        <ul class="link-list">
+            
+            <li class="link-card">
+                <div class="link-icon">🏛️</div>
+                <div class="link-content">
+                    <h3><a href="https://www.przykladowa-fundacja.pl" target="_blank">Polska Fundacja Zdrowia Psychicznego</a></h3>
+                    <p class="link-description">Oficjalna strona organizacji zajmującej się promowaniem wiedzy o zdrowiu psychicznym i dostarczaniem bezpłatnych materiałów edukacyjnych.</p>
+                </div>
+            </li>
+
+            <li class="link-card">
+                <div class="link-icon">📅</div>
+                <div class="link-content">
+                    <h3><a href="https://www.przykladowy-tracker.com" target="_blank">Aplikacja do śledzenia nastroju i snu</a></h3>
+                    <p class="link-description">Proste, ale skuteczne narzędzie do monitorowania dziennych wahań emocjonalnych, ułatwiające autoanalizę i pracę terapeutyczną.</p>
+                </div>
+            </li>
+
+            <li class="link-card">
+                <div class="link-icon">💡</div>
+                <div class="link-content">
+                    <h3><a href="https://www.przykladowy-blog.com" target="_blank">Portal "Psychologia Dziś"</a></h3>
+                    <p class="link-description">Aktualne artykuły i analizy z różnych nurtów psychologii, pisane przez ekspertów w przystępny i rzetelny sposób.</p>
+                </div>
+            </li>
+
+            <li class="link-card">
+                <div class="link-icon">🔬</div>
+                <div class="link-content">
+                    <h3><a href="https://www.uniwersytet.pl/badania-psychologiczne" target="_blank">Centrum Badań nad Stressem (Uniwersytet)</a></h3>
+                    <p class="link-description">Dostęp do najnowszych publikacji naukowych i raportów z badań dotyczących technik relaksacyjnych i psychoterapii.</p>
+                </div>
+            </li>
+            
+        </ul>
+
+        <div class="back-link">
+            <a href="biblioteka.html">&leftarrow; Wróć do Biblioteki Psychologicznej</a>
+        </div>
+    </div>
+
+</body>
+</html>
