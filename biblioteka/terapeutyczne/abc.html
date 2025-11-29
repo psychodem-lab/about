@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model 5 Obszarów (CBT) - Responsywny</title>
+    <title>Tabela Myśli Automatycznych</title>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
-        :root {
-            --col-situation: #6c757d; /* Szary */
-            --col-thoughts: #007bff;  /* Niebieski */
-            --col-emotions: #e83e8c;  /* Różowy */
-            --col-body: #28a745;      /* Zielony */
-            --col-behavior: #fd7e14;  /* Pomarańczowy */
-            --bg-color: #f4f6f8;
+        /* Styl bazowy */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6; 
+            margin: 20px; 
+            background-color: #FAFAFA
+            color: #1a237e; /* Głęboki granat, kontrastowy i czytelny */
+        }
+        
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background-color: #ffffff; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 40px; 
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
           .logo-wrapper {
             text-align: center; 
             margin-bottom: 20px; 
@@ -43,250 +42,242 @@
             border: 0;
         }
 
+        
+        h1 { 
+            color: #0d47a1; /* Głęboki, wyraźny niebieski */
+            text-align: center; 
+            margin-bottom: 10px; 
+        }
 
-        header {
+        .subtitle {
             text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        h1 { margin: 0; font-size: 24px; }
-        p.subtitle { margin: 5px 0 0; color: #666; font-size: 14px; }
-
-        /* --- DEKLARACJA STYLÓW DLA DESKTOPU (Default) --- */
-        
-        .diagram-wrapper {
-            position: relative;
-            width: 900px;
-            height: 680px; 
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            /* Ustawienie domyślne dla desktopu */
+            color: #1976d2; /* Średnio-ciemny niebieski */
+            margin-bottom: 30px;
+            font-weight: 300;
         }
 
-        .card {
-            position: absolute; /* Domyślne dla desktopu */
-            width: 250px;
-            height: 150px;
-            background: #fff;
-            border-left: 6px solid #ccc;
-            border-radius: 8px;
+        /* --- NAWIGACJA --- */
+        .nav-bar {
+            text-align: center;
+            margin-bottom: 30px;
             padding: 15px;
-            box-sizing: border-box;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s;
-            z-index: 10;
+            border-bottom: 2px solid #90caf9;
+            background-color: #bbdefb;
+            border-radius: 10px;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: #0d47a1;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color: #e3f2fd;
+            transition: background-color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #90caf9;
+            color: #1a237e;
         }
 
-        .card:hover, .card:focus-within {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-            z-index: 20;
+        /* --- STYLIZE DLA KWestionariusza Myśli Automatycznych (KMA) --- */
+        .kma-section {
+            padding-top: 20px;
         }
 
-        .card h3 {
-            margin: 0 0 10px 0;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            font-weight: 700;
-            pointer-events: none;
-        }
-
-        .card-content {
-            flex-grow: 1;
-            outline: none;
-            font-size: 14px;
-            color: #333;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .kma-header {
+            color: #0d47a1;
             text-align: center;
-            line-height: 1.4;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
         }
 
-        .card-content[data-placeholder]:empty:before {
-            content: attr(data-placeholder);
-            color: #aaa;
-            font-style: italic;
-            pointer-events: none;
+        .form-section { 
+            margin-bottom: 25px; 
+            padding: 15px; 
+            border-left: 5px solid #1e88e5; /* Wizualne wyróżnienie sekcji */
+            background-color: #f9f9f9; 
+            border-radius: 5px; 
         }
 
-        /* --- POZYCJONOWANIE DESKTOP --- */
-        .card-situation { top: 40px; left: 50%; transform: translateX(-50%); border-color: var(--col-situation); }
-        .card-situation h3 { color: var(--col-situation); }
-
-        .card-thoughts { top: 230px; left: 50%; transform: translateX(-50%); width: 300px; height: 160px; border-color: var(--col-thoughts); background-color: #fbfdff; }
-        .card-thoughts h3 { color: var(--col-thoughts); }
-
-        .card-behavior { top: 450px; left: 60px; border-color: var(--col-behavior); }
-        .card-behavior h3 { color: var(--col-behavior); }
-
-        .card-body { top: 450px; right: 60px; border-color: var(--col-body); }
-        .card-body h3 { color: var(--col-body); }
-
-        .card-emotions { top: 500px; left: 50%; transform: translateX(-50%); border-color: var(--col-emotions); width: 260px; }
-        .card-emotions h3 { color: var(--col-emotions); }
-
-        .actions { margin-top: 20px; }
-        button {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-family: inherit;
-            transition: background 0.3s;
+        .form-section label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
+            color: #1e88e5; 
         }
-        button:hover { background-color: #555; }
+        
+        .form-section textarea { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            box-sizing: border-box; 
+            resize: vertical; 
+            min-height: 80px; 
+        }
 
+        .kma-steps { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+        }
+
+        /* Wyróżnienie Myśli Automatycznej */
+        .thought-section {
+            border-left-color: #ff9800; /* Pomarańczowy dla kluczowej myśli */
+        }
+        .thought-section label {
+            color: #ff9800 !important;
+        }
+        
+        /* Wyróżnienie Dowodów ZA i PRZECIW */
+        .evidence-for { border-left-color: #4caf50; }
+        .evidence-for label { color: #4caf50 !important; }
+
+        .evidence-against { border-left-color: #2196f3; }
+        .evidence-against label { color: #2196f3 !important; }
+
+        /* Wyróżnienie Myśli Alternatywnej */
+        .alternative-thought { border-left-color: #9c27b0; }
+        .alternative-thought label { color: #9c27b0 !important; }
+
+
+        /* Przyciski Akcji (Kwestionariusz) */
+        .action-buttons { 
+            text-align: center; 
+            margin-top: 30px; 
+        }
+        
+        .action-buttons button { 
+            padding: 12px 25px; 
+            margin: 0 10px; 
+            border: none; 
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: background-color 0.3s;
+        }
+        
+        .print-btn { 
+            background-color: #4caf50; /* Zielony */
+            color: white; 
+        }
+        
+        .print-btn:hover {
+            background-color: #43a047;
+        }
+
+        .clear-btn { 
+            background-color: #e53935; /* Czerwony */
+            color: white; 
+        }
+
+        .clear-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Media Query dla responsywności */
+        @media (max-width: 650px) {
+            .kma-steps { 
+                grid-template-columns: 1fr; 
+            }
+        }
+        
+        /* Media Print (zintegrowane) */
         @media print {
-            body { background: white; padding: 0; }
-            .diagram-wrapper { box-shadow: none; border: 1px solid #ddd; height: auto; padding-bottom: 50px;}
-            .actions, header p { display: none; }
-        }
-
-        /* --- MEDIA QUERY DLA URZĄDZEŃ MOBILNYCH (max-width: 768px) --- */
-        @media screen and (max-width: 768px) {
+            .nav-bar { display: none; }
+            body { background-color: white !important; color: black !important; }
+            .container { box-shadow: none; margin: 0; padding: 0; }
+            h1, .subtitle, .kma-header { color: black !important; }
             
-            body { padding: 10px; }
-            header { margin-bottom: 10px; }
-
-            /* 1. Kontener (Przygotowanie do Stackingu) */
-            .diagram-wrapper {
-                width: 100%; /* Pełna szerokość */
-                min-height: auto;
-                height: auto !important; /* Usuń stałą wysokość */
-                box-shadow: none; 
-                background: none;
-                padding: 0;
-                
-                /* Użyj Flexbox do ułożenia kart w stos */
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px; /* Odstępy między kartami */
+            /* Ukryj przyciski */
+            .action-buttons { display: none; }
+            .form-section {
+                border-left: 2px solid #ccc;
+                background-color: white;
+                padding: 5px 0;
             }
-
-            /* 2. Karty (Zmiana Pozycjonowania i Rozmiaru) */
-            .card {
-                position: static !important; /* KLUCZOWE: zablokuj pozycjonowanie absolutne */
-                width: 95% !important; /* Prawie pełna szerokość wewnątrz kontenera */
-                margin: 0;
-                transform: none !important; /* Usuń wszystkie transformacje */
-                min-height: 100px; /* Minimalna wysokość, by zawartość była widoczna */
-                height: auto; /* Wysokość dopasowuje się do treści */
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Delikatniejszy cień */
-                border-radius: 12px;
-                padding: 15px;
+            textarea {
+                border: 1px dashed #aaa;
+                background-color: #fff;
             }
-
-            /* 3. Usuwamy transformacje z hovera na mobile, żeby uniknąć błędów */
-            .card:hover, .card:focus-within {
-                transform: none;
-            }
-
-            /* 4. Resetujemy style szerokości/kolorów specyficzne dla pozycji desktopowej */
-            .card-thoughts, .card-emotions {
-                width: 95% !important; /* Zapewnienie pełnej szerokości */
-                left: auto !important;
-                right: auto !important;
-            }
-
         }
     </style>
 </head>
 <body>
- <div class="logo-wrapper">
+     <div class="logo-wrapper">
             <a href="index.html" title="Powrót do strony głównej">
                 <img src="logo.png" alt="Psychodem">
-            </a></div>
-    <header>
-        <h1>Model 5 Obszarów (CBT)</h1>
-        <p class="subtitle">Wypełnij, aby zrozumieć powiązania między sytuacją a Twoimi reakcjami.</p>
-    </header>
- <div class="nav-bar">
-            <a href="index.html" class="nav-link">Strona główna</a>
-        </div> <br>
-    <div class="diagram-wrapper">
-        
-        <div class="card card-situation">
-            <h3>Sytuacja / Bodziec</h3>
-            <div class="card-content" contenteditable="true" data-placeholder="Co się stało? Gdzie byłeś? Z kim? (Tylko fakty)"></div>
-        </div>
+            </a>
+    <div class="container">
+        <h1>Tabela Myśli Automatycznych</h1>
+        <p class="subtitle">Siedmiostopniowy proces analizy i kwestionowania negatywnych myśli w nurcie CBT.</p>
 
-        <div class="card card-thoughts">
-            <h3>Myśli Automatyczne</h3>
-            <div class="card-content" contenteditable="true" data-placeholder="Co przemknęło Ci przez głowę? Jak to zinterpretowałeś?"></div>
-        </div>
+        <!-- KWestionariusz MYŚLI AUTOMATYCZNYCH (Formularz) -->
+        <div class="kma-section">
+            <form id="kmaForm" onsubmit="return false;">
 
-        <div class="card card-behavior">
-            <h3>Zachowanie</h3>
-            <div class="card-content" contenteditable="true" data-placeholder="Co zrobiłeś? Czego uniknąłeś?"></div>
-        </div>
+                <!-- KROK 1: SYTUACJA I EMOCJE -->
+                <div class="form-section">
+                    <label for="situation">1. Sytuacja (Co się wydarzyło, gdzie, kiedy i z kim?)</label>
+                    <textarea id="situation" placeholder="Np. Dostałem negatywną opinię od szefa na spotkaniu."></textarea>
+                    <div class="description">Opisz fakty (kto, co, gdzie, kiedy), bez oceniania czy interpretowania.</div>
+                </div>
 
-        <div class="card card-body">
-            <h3>Reakcje z Ciała</h3>
-            <div class="card-content" contenteditable="true" data-placeholder="Co poczułeś w ciele? (serce, oddech, napięcie)"></div>
-        </div>
+                <div class="form-section">
+                    <label for="emotions">2. Emocje (Co czułeś? Jaki był poziom intensywności 0-100%?)</label>
+                    <textarea id="emotions" placeholder="Np. Lęk (85%), Smutek (60%), Wstyd (40%)"></textarea>
+                    <div class="description">Nazwij emocje (używaj pojedynczych słów) i oceń ich siłę przed kwestionowaniem.</div>
+                </div>
 
-        <div class="card card-emotions">
-            <h3>Emocje</h3>
-            <div class="card-content" contenteditable="true" data-placeholder="Nazwij emocje (np. lęk, smutek, złość)."></div>
-        </div>
+                <!-- KROK 2: MYŚL AUTOMATYCZNA -->
+                <div class="form-section thought-section">
+                    <label for="automatic-thought">3. Myśl Automatyczna (Jaka myśl/przekonanie pojawiło się w Twojej głowie w tym momencie?)</label>
+                    <textarea id="automatic-thought" placeholder="Np. 'Jestem beznadziejny/a', 'Nigdy mi się nie uda', 'Wszyscy mnie oceniają'."></textarea>
+                    <div class="description">Zapisz myśl w formie dosłownej, tak jak się pojawiła, nawet jeśli wydaje się irracjonalna.</div>
+                </div>
 
-    </div>
+                <!-- KROK 3: KWestionowanie Myśli -->
+                <div class="kma-steps">
+                    <div class="form-section evidence-for">
+                        <label for="evidence-for">4. Dowody ZA Myślą (Co przemawia za tym, że ta myśl jest PRAWIDŁOWA?)</label>
+                        <textarea id="evidence-for" placeholder="Np. Szef faktycznie wytknął mi błąd."></textarea>
+                        <div class="description">Bądź obiektywny – zbierz fakty, które potwierdzają tylko tę myśl.</div>
+                    </div>
 
-    <div class="actions">
-        <button onclick="window.print()">Drukuj / Zapisz jako PDF</button>
-    </div>
+                    <div class="form-section evidence-against">
+                        <label for="evidence-against">5. Dowody PRZECIW Myśli (Co przemawia za tym, że ta myśl jest NIEPRAWDZIWA lub PRZEKOLORYZOWANA?)</label>
+                        <textarea id="evidence-against" placeholder="Np. Pochwalił mnie za inne projekty w zeszłym miesiącu. To tylko jedno zadanie, a nie dowód na moją beznadziejność."></textarea>
+                        <div class="description">Poszukaj alternatywnych wyjaśnień i faktów zaprzeczających.</div>
+                    </div>
+                </div>
 
-    <script>
-        // --- Skrypt dopasowujący rozmiar tekstu ---
-        const contents = document.querySelectorAll('.card-content');
-
-        contents.forEach(el => {
-            const adjustFont = () => {
-                let size = 14; 
-                el.style.fontSize = size + 'px';
+                <!-- KROK 4: NOWA PERSPEKTYWA -->
+                <div class="form-section alternative-thought">
+                    <label for="alternative-thought">6. Myśl Alternatywna/Realistyczna (Jaka jest bardziej zrównoważona i pomocna perspektywa?)</label>
+                    <textarea id="alternative-thought" placeholder="Np. 'Popełniłem/am błąd w tym zadaniu. Błędy się zdarzają i uczę się na nich. Mogę to naprawić.'"></textarea>
+                    <div class="description">Przeformułuj myśl na bardziej realistyczną, uwzględniającą wszystkie dowody.</div>
+                </div>
                 
-                // Zmniejszaj tekst jeśli nie mieści się w pudełku
-                while (el.scrollHeight > el.clientHeight && size > 9) {
-                    size--;
-                    el.style.fontSize = size + 'px';
-                }
-            };
+                <div class="form-section">
+                    <label for="re-rate-emotions">7. Ponowna Ocena Emocji (Jaki jest poziom intensywności emocji TERAZ? 0-100%?)</label>
+                    <textarea id="re-rate-emotions" placeholder="Np. Lęk (20%), Smutek (10%)"></textarea>
+                    <div class="description">Porównaj obecną intensywność emocji z intensywnością początkową.</div>
+                </div>
 
-            el.addEventListener('input', adjustFont);
-            
-            // Obsługa wklejania (czyszczenie formatowania)
-            el.addEventListener('paste', (e) => {
-                e.preventDefault();
-                const text = (e.clipboardData || window.clipboardData).getData('text');
-                document.execCommand("insertHTML", false, text);
-                adjustFont();
-            });
-            
-            // Initial adjustment (ważne przy responsywności)
-            adjustFont();
-        });
-        
-        // Ponowne dopasowanie przy zmianie orientacji/rozmiaru okna
-        window.addEventListener('resize', () => {
-             contents.forEach(el => {
-                el.style.fontSize = '14px'; // Reset przed ponownym obliczeniem
-                const event = new Event('input');
-                el.dispatchEvent(event);
-            });
-        });
-    </script>
+                <!-- PRZYCISKI AKCJI -->
+                <div class="action-buttons">
+                    <button class="print-btn" onclick="window.print()">🖨️ Drukuj / Zapisz jako PDF</button>
+                    <button class="clear-btn" type="reset">🗑️ Wyczyść Kwestionariusz</button>
+                </div>
+            </form>
 
+            <p class="description" style="text-align: center; margin-top: 20px;">
+                **Uwaga:** Dane wpisane w ten formularz są bezpieczne (nie są wysyłane). Pamiętaj, aby wydrukować zapis!
+            </p>
+        </div>
+
+    </div>
 </body>
 </html>
-
