@@ -5,60 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psychoterapia - Twoja Firma</title>
     <style>
+        :root {
+            --primary-color: #00796B; /* Głęboka, szlachetna zieleń */
+            --secondary-color: #E0F2F1; /* Bardzo jasny, miętowy akcent */
+            --text-color: #333333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtelny cień */
+            --border-radius: 12px;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: white; /* Białe tło */
-            color: #333;
+            background-color: #FAFAFA; /* Lekko szare tło dla kontrastu */
+            color: var(--text-color);
         }
+
+        /* --- Nagłówek i Nawigacja --- */
         header {
-            background-color: #4CAF50; /* Zielony kolor dla nagłówka */
+            background-color: var(--primary-color);
             color: white;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
+            box-shadow: var(--shadow);
+        }
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+            font-weight: 500;
+        }
+        
+        nav {
+            background-color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-bottom: 1px solid #EEEEEE;
         }
         nav ul {
             list-style-type: none;
             padding: 0;
-            text-align: center;
-            background-color: #E8F5E9; /* Bardzo jasny zielony, prawie biały */
-            border-bottom: 2px solid #4CAF50;
+            margin: 0;
         }
         nav ul li {
             display: inline;
-            margin: 0 15px;
+            margin: 0 20px;
         }
         nav ul li a {
             text-decoration: none;
-            color: #4CAF50; /* Zielone linki */
+            color: var(--primary-color);
             padding: 10px 15px;
             display: inline-block;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 6px;
+            font-weight: 500;
         }
+        nav ul li a:hover {
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        /* --- Kontener Główny i Sekcje --- */
         .container {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            display: grid;
+            gap: 30px;
+            grid-template-columns: 1fr; /* Utrzymaj układ kolumnowy na głównej stronie */
         }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
         h2 {
-            color: #4CAF50; /* Zielony kolor dla podnagłówków */
-            border-bottom: 1px solid #E0E0E0;
-            padding-bottom: 5px;
+            color: var(--primary-color);
+            font-weight: 400;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
         }
+
+        /* --- Stopka --- */
         footer {
             text-align: center;
-            padding: 10px;
-            margin-top: 30px;
-            background-color: #E8F5E9; /* Lekki zielony spód */
-            color: #4CAF50;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🌱 Twoja Firma Psychoterapeutyczna</h1>
-        <p>Pomoc i wsparcie w drodze do równowagi.</p>
+        <h1>🌱 Centrum Terapii Spokój</h1>
+        <p>Pomoc i wsparcie w drodze do równowagi psychicznej.</p>
     </header>
 
     <nav>
@@ -72,18 +118,16 @@
     <div class="container">
 
         <section id="onas">
-            <h2>O nas</h2>
-            <p>Jesteśmy zespołem doświadczonych psychoterapeutów, którzy z pasją i empatią wspierają swoich klientów w radzeniu sobie z wyzwaniami życiowymi. Nasza praca opiera się na ... (tutaj możesz dodać więcej szczegółów o podejściu i misji firmy).</p>
+            <h2>✨ Informacje o nas</h2>
+            <p>Jesteśmy zespołem doświadczonych psychoterapeutów, którzy z pasją i empatią wspierają swoich klientów w radzeniu sobie z wyzwaniami życiowymi. Nasza praca opiera się na ... (dodaj szczegóły o podejściu i misji firmy). Wierzymy, że każdy zasługuje na życie w pełnym dobrostanie. </p>
         </section>
 
-        <hr>
-
         <section id="kontakt">
-            <h2>Kontakt</h2>
-            <p>Masz pytania lub chciałbyś umówić się na spotkanie?</p>
+            <h2>📞 Kontakt</h2>
+            <p>Jesteśmy dostępni, aby odpowiedzieć na Twoje pytania i umówić pierwszą konsultację.</p>
             <ul>
-                <li>**Telefon:** +48 123 456 789</li>
-                <li>**Email:** kontakt@twojafirma.pl</li>
+                <li>**Telefon:** <span style="font-weight: bold; color: var(--primary-color);">+48 123 456 789</span></li>
+                <li>**Email:** <span style="font-weight: bold; color: var(--primary-color);">kontakt@twojafirma.pl</span></li>
                 <li>**Adres:** ul. Spokojna 10, 00-001 Warszawa</li>
             </ul>
         </section>
@@ -91,7 +135,7 @@
     </div>
 
     <footer>
-        &copy; 2025 Twoja Firma Psychoterapeutyczna. Wszelkie prawa zastrzeżone.
+        &copy; 2025 Centrum Terapii Spokój.
     </footer>
 
 </body>
