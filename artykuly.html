@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artykuły - Biblioteka Psychologiczna</title>
+    <style>
+        :root {
+            --primary-color: #00796B; /* Głęboka, szlachetna zieleń */
+            --secondary-color: #E0F2F1; /* Bardzo jasny, miętowy akcent */
+            --text-color: #333333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+        }
+
+        body {
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            color: var(--text-color);
+        }
+
+        /* --- Nagłówek --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        /* --- Kontener Główny --- */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        /* --- Lista Artykułów --- */
+        .article-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .article-card {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .article-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+
+        .article-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 10px;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        .read-more-btn:hover {
+            background-color: #004D40; /* Ciemniejsza zieleń */
+        }
+        
+        /* --- Link Powrotny --- */
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .back-link a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📰 Artykuły Psychologiczne</h1>
+        <p>Wiedza i najnowsze badania w przystępnej formie.</p>
+    </header>
+
+    <div class="container">
+        <h2>Najnowsze wpisy</h2>
+
+        <ul class="article-list">
+            
+            <li class="article-card">
+                <h3>Jak radzić sobie z przewlekłym stresem w pracy?</h3>
+                <p class="article-meta">Autor: Zespół Terapii | Data: 15 Listopada 2025</p>
+                <p>Odkryj skuteczne metody zarządzania wysokim poziomem stresu i naucz się technik, które pomogą Ci odzyskać kontrolę nad codziennymi wyzwaniami. Czytaj o równowadze praca-życie.</p>
+                <a href="artykul_1.html" class="read-more-btn">Czytaj więcej &rarr;</a>
+            </li>
+
+            <li class="article-card">
+                <h3>Mindfulness w praktyce: 5 prostych ćwiczeń na uważność.</h3>
+                <p class="article-meta">Autor: Dr. Anna Kowalska | Data: 10 Listopada 2025</p>
+                <p>Mindfulness to więcej niż modne słowo. To narzędzie, które może głęboko zmienić Twoje postrzeganie świata. Przedstawiamy 5 prostych ćwiczeń do natychmiastowego zastosowania.</p>
+                <a href="artykul_2.html" class="read-more-btn">Czytaj więcej &rarr;</a>
+            </li>
+
+            <li class="article-card">
+                <h3>Wpływ snu na zdrowie psychiczne — co musisz wiedzieć?</h3>
+                <p class="article-meta">Autor: Zespół Terapii | Data: 01 Listopada 2025</p>
+                <p>Niewystarczająca ilość snu ma katastrofalny wpływ na Twój nastrój i funkcje poznawcze. Dowiedz się, jak higiena snu może stać się Twoim największym sprzymierzeńcem w terapii.</p>
+                <a href="artykul_3.html" class="read-more-btn">Czytaj więcej &rarr;</a>
+            </li>
+
+        </ul>
+
+        <div class="back-link">
+            <a href="biblioteka.html">&leftarrow; Wróć do Biblioteki Psychologicznej</a>
+        </div>
+    </div>
+
+</body>
+</html>
