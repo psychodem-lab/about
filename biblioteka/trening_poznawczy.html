@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trening Poznawczy - Biblioteka Psychologiczna</title>
+    <style>
+        :root {
+            --primary-color: #00796B; /* Głęboka, szlachetna zieleń */
+            --secondary-color: #E0F2F1; /* Bardzo jasny, miętowy akcent */
+            --text-color: #333333;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Nagłówek --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        /* --- Kontener Główny --- */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* --- Układ Siatki (Grid) dla Kart Ćwiczeń --- */
+        .tools-grid {
+            display: grid;
+            /* 3 kolumny na dużych ekranach */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .tool-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: left;
+            border-top: 5px solid #4CAF50; /* Jasny zielony akcent */
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            background-color: var(--secondary-color);
+        }
+
+        .tool-card h3 {
+            color: #004D40;
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .tool-card .goal {
+            display: block;
+            font-size: 0.9em;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .tool-card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px dotted var(--primary-color);
+            padding-bottom: 2px;
+            transition: color 0.3s;
+        }
+        .tool-card a:hover {
+            color: #004D40;
+            border-bottom-style: solid;
+        }
+        
+        /* --- Link Powrotny --- */
+        .back-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .back-link a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🧠 Trening Poznawczy</h1>
+        <p>Ćwiczenia i techniki stymulujące pamięć, uwagę i szybkość przetwarzania informacji.</p>
+    </header>
+
+    <div class="container">
+        <h2>Kategorie ćwiczeń dla Twojego umysłu</h2>
+        <p class="intro-text">Regularny trening poznawczy wspiera elastyczność umysłu i może poprawiać koncentrację w codziennym życiu. Wybierz obszar, który chcesz rozwijać.</p>
+
+        <ul class="tools-grid">
+            
+            <li class="tool-card">
+                <h3>Pamięć Robocza i Krótkotrwała</h3>
+                <span class="goal">Cel: Utrzymanie i manipulowanie informacją w umyśle.</span>
+                <p>Odkryj ćwiczenia typu N-back oraz strategie zapamiętywania list zakupów i numerów telefonów bez notowania. Popraw efektywność nauki.</p>
+                <a href="pamiec_cwiczenia.html">Zacznij Trening &rarr;</a>
+            </li>
+
+            <li class="tool-card">
+                <h3>Uwaga Selektywna i Koncentracja</h3>
+                <span class="goal">Cel: Skupienie się na zadaniu i ignorowanie dystraktorów.</span>
+                <p>Poznaj techniki do trenowania uwagi, w tym zadania typu Stroop i ćwiczenia z medytacji skanowania ciała. Naucz się, jak pracować w hałasie.</p>
+                <a href="uwaga_cwiczenia.html">Popraw Koncentrację &rarr;</a>
+            </li>
+
+            <li class="tool-card">
+                <h3>Elastyczność Poznawcza i Szybkość</h3>
+                <span class="goal">Cel: Szybkie przełączanie się między zadaniami i kreatywne myślenie.</span>
+                <p>Ćwiczenia na płynność słowną, zagadki logiczne i zadania z przełączaniem kontekstu. Rozwijaj zdolność do adaptacji i myślenia lateralnego.</p>
+                <a href="elastycznosc_cwiczenia.html">Trenuj Elastyczność &rarr;</a>
+            </li>
+            
+            <li class="tool-card">
+                <h3>Pamięć Długotrwała i Kodowanie</h3>
+                <span class="goal">Cel: Trwałe przechowywanie i odzyskiwanie informacji.</span>
+                <p>Skuteczne mnemotechniki, metody wizualizacji i tworzenie map myśli. Dowiedz się, jak wzmacniać ślady pamięciowe i walczyć z zapominaniem.</p>
+                <a href="pamiec_dlugotrwala.html">Opanuj Mnemotechniki &rarr;</a>
+            </li>
+
+        </ul>
+
+        <div class="back-link">
+            <a href="biblioteka.html">&leftarrow; Wróć do Biblioteki Psychologicznej</a>
+        </div>
+    </div>
+
+</body>
+</html>
