@@ -1,0 +1,84 @@
+/* ======================================= */
+/* Plik: style.css - Globalne style firmy */
+/* ======================================= */
+
+/* Zmienne globalne (dostosuj kolory tutaj, a zmienią się wszędzie!) */
+:root {
+    --primary-color: #00796B; /* Głęboka, szlachetna zieleń */
+    --secondary-color: #E0F2F1; /* Bardzo jasny, miętowy akcent (tło) */
+    --text-color: #333333;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtelny cień */
+    --border-radius: 12px;
+}
+
+/* --- Globalne Style Tła i Tekstu --- */
+body {
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FAFAFA; /* Lekko szare tło dla kontrastu */
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- Nagłówki i Akcenty --- */
+h1 {
+    font-weight: 500;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* --- Linki --- */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #004D40;
+    text-decoration: underline;
+}
+
+/* --- Kontenery i Sekcje --- */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+section, .article-container, .link-card, .book-card, .tool-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+/* --- Nagłówek i Stopka (Ujednolicone) --- */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+/* Pamiętaj, aby przenieść tutaj wszystkie unikalne style kart, siatek (grid) i nawigacji z poszczególnych plików HTML! */
