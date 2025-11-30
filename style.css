@@ -22,17 +22,17 @@ body {
 }
 
 /* --- Nagłówki i Akcenty --- */
-h1 {
-    font-weight: 500;
-}
 
-h2 {
-    color: var(--primary-color);
-    font-weight: 400;
-    text-align: center;
-    border-bottom: 2px solid var(--secondary-color);
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
 }
 
 /* --- Linki --- */
@@ -49,11 +49,16 @@ a:hover {
 
 /* --- Kontenery i Sekcje --- */
 .container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 20px;
-}
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+}     h2 {
+            color: var(--primary-color);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
 section, .article-container, .link-card, .book-card, .tool-card {
     background-color: white;
@@ -80,5 +85,56 @@ footer {
     color: var(--primary-color);
     font-size: 0.9em;
 }
+ /* --- Układ Siatki (Grid) dla kart Biblioteki --- */
+        .grid-container {
+            display: grid;
+            /* Utwórz 3 kolumny na dużych ekranach, 2 na średnich, 1 na małych */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0;
+            list-style-type: none;
+        }
 
-/* Pamiętaj, aby przenieść tutaj wszystkie unikalne style kart, siatek (grid) i nawigacji z poszczególnych plików HTML! */
+        .grid-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px); /* Efekt uniesienia */
+            box-shadow: var(--shadow-hover);
+            background-color: var(--secondary-color);
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            display: block;
+            font-size: 1.2em;
+        }
+
+        /* --- Link Powrotny --- */
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .back-link a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+</style>
