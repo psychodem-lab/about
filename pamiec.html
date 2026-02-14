@@ -3,36 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pamiętnik 2.0</title>
+    <title>Pamiętnik Binarny</title>
     <style>
         :root { --p: #6366f1; --bg: #f8fafc; --txt: #1e293b; }
-        body { font-family: sans-serif; background: var(--bg); color: var(--txt); padding: 20px; display: flex; justify-content: center; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--txt); padding: 15px; display: flex; justify-content: center; }
         .app { width: 100%; max-width: 500px; }
-        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        input, textarea, button { width: 100%; border-radius: 10px; border: 1px solid #ddd; padding: 12px; box-sizing: border-box; font-size: 16px; margin-bottom: 10px; }
-        button { background: var(--p); color: white; border: none; font-weight: bold; cursor: pointer; }
-        button.sec { background: #f1f5f9; color: var(--txt); }
-        textarea { height: 250px; font-family: monospace; resize: none; }
-        .status { padding: 10px; border-radius: 8px; text-align: center; display: none; font-size: 14px; }
+        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 12px; }
+        input, textarea, button { width: 100%; border-radius: 10px; border: 1px solid #ddd; padding: 12px; box-sizing: border-box; font-size: 16px; margin-bottom: 8px; }
+        button { background: var(--p); color: white; border: none; font-weight: bold; cursor: pointer; height: 50px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        textarea { height: 300px; font-family: monospace; resize: none; margin-top: 8px; }
+        .status { padding: 10px; border-radius: 8px; text-align: center; display: none; font-size: 14px; margin-top: 8px; }
     </style>
 </head>
 <body>
 
 <div class="app">
     <div class="card">
-        <label>Hasło:</label>
-        <input type="password" id="pass" placeholder="Twoje tajne hasło">
-        <label>Plik:</label>
-        <input type="file" id="file" accept=".json">
-        <div style="display: flex; gap: 10px;">
-            <button class="sec" onclick="decrypt()">🔓 Otwórz</button>
-            <button class="sec" onclick="addDate()">📅 Data</button>
+        <label>Klucz i Nazwa:</label>
+        <input type="password" id="pass" placeholder="Hasło (klucz)...">
+        <input type="text" id="fileName" placeholder="Nazwa pliku (opcjonalnie)">
+        
+        <label>Wczytaj plik (.enc):</label>
+        <input type="file" id="file" accept=".enc">
+        
+        <div class="grid">
+            <button style="background:#64748b" onclick="decrypt()">🔓 Otwórz</button>
+            <button style="background:#64748b" onclick="addDate()">📅 +Data</button>
         </div>
     </div>
 
     <div class="card">
-        <textarea id="content" placeholder="Tu wpisz tekst..."></textarea>
-        <button onclick="encrypt()">🔒 Zaszyfruj i pobierz</button>
+        <textarea id="content" placeholder="Treść pamiętnika..."></textarea>
+        <button onclick="encrypt()">🔒 Szyfruj i Pobierz (.enc)</button>
         <div id="msg" class="status"></div>
     </div>
 </div>
@@ -42,8 +45,7 @@
 
     function log(m, success) {
         const e = document.getElementById('msg');
-        e.innerText = m;
-        e.style.display = 'block';
+        e.innerText = m; e.style.display = 'block';
         e.style.background = success ? '#d1fae5' : '#fee2e2';
         e.style.color = success ? '#065f46' : '#991b1b';
     }
@@ -51,7 +53,7 @@
     function addDate() {
         const area = document.getElementById('content');
         const d = new Date().toLocaleString('pl-PL');
-        area.value = `\n--- ${d} ---\n` + area.value;
+        area.value = `--- ${d} ---\n` + area.value;
     }
 
     async function getKey(pw, salt) {
@@ -67,26 +69,27 @@
         try {
             const pw = document.getElementById('pass').value;
             const text = document.getElementById('content').value;
-            if(!pw || !text) return alert("Brak hasła lub treści");
+            let name = document.getElementById('fileName').value || `wpis_${new Date().toISOString().slice(0,10)}`;
+            if(!pw || !text) return alert("Brak danych!");
 
             const salt = crypto.getRandomValues(new Uint8Array(16));
             const iv = crypto.getRandomValues(new Uint8Array(12));
             const key = await getKey(pw, salt);
             const cipher = await crypto.subtle.encrypt({name: 'AES-GCM', iv}, key, new TextEncoder().encode(text));
 
-            const out = {
-                s: btoa(String.fromCharCode(...salt)),
-                i: btoa(String.fromCharCode(...iv)),
-                d: btoa(String.fromCharCode(...new Uint8Array(cipher)))
-            };
+            // Łączymy wszystko w jeden ciąg bajtów (Binary Packing)
+            const combined = new Uint8Array(salt.length + iv.length + cipher.byteLength);
+            combined.set(salt, 0);
+            combined.set(iv, salt.length);
+            combined.set(new Uint8Array(cipher), salt.length + iv.length);
 
-            const blob = new Blob([JSON.stringify(out)], {type: 'application/json'});
+            const blob = new Blob([combined], {type: 'application/octet-stream'});
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'pamietnik.json';
+            a.download = name + '.enc';
             a.click();
-            log("Zapisano!", true);
-        } catch(e) { log("Błąd szyfrowania", false); }
+            log("Zapisano jako " + name + ".enc", true);
+        } catch(e) { log("Błąd zapisu", false); }
     }
 
     async function decrypt() {
@@ -95,17 +98,20 @@
             const file = document.getElementById('file').files[0];
             if(!pw || !file) return alert("Podaj hasło i plik");
 
-            const raw = JSON.parse(await file.text());
-            const salt = new Uint8Array(atob(raw.s).split('').map(c => c.charCodeAt(0)));
-            const iv = new Uint8Array(atob(raw.i).split('').map(c => c.charCodeAt(0)));
-            const data = new Uint8Array(atob(raw.d).split('').map(c => c.charCodeAt(0)));
+            const buf = await file.arrayBuffer();
+            const fullData = new Uint8Array(buf);
+
+            // Wyciągamy bajty z konkretnych pozycji
+            const salt = fullData.slice(0, 16);
+            const iv = fullData.slice(16, 28);
+            const data = fullData.slice(28);
 
             const key = await getKey(pw, salt);
             const dec = await crypto.subtle.decrypt({name: 'AES-GCM', iv}, key, data);
 
             document.getElementById('content').value = new TextDecoder().decode(dec);
             log("Odszyfrowano!", true);
-        } catch(e) { log("Błędne hasło!", false); }
+        } catch(e) { log("Błędne hasło lub plik!", false); }
     }
 </script>
 </body>
