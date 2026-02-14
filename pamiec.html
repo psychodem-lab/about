@@ -3,250 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kryptograficzny Pamiętnik</title>
+    <title>Pamiętnik 2.0</title>
     <style>
-        :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --success: #10b981;
-            --error: #ef4444;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom) 16px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            margin-bottom: 40px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        h1 {
-            font-size: 24px;
-            font-weight: 800;
-            margin: 0;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-        }
-
-        .card {
-            background: var(--card);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            margin-bottom: 16px;
-        }
-
-        .input-group {
-            margin-bottom: 16px;
-        }
-
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text-light);
-            text-transform: uppercase;
-        }
-
-        input[type="password"], input[type="file"], textarea {
-            width: 100%;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 16px; /* Zapobiega auto-zoomowi na iOS */
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-            outline: none;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--primary);
-            ring: 2px var(--primary);
-        }
-
-        textarea {
-            height: 300px;
-            font-family: "SF Mono", SFMono-Regular, ui-monospace, monospace;
-            line-height: 1.5;
-            resize: none;
-            margin-top: 10px;
-        }
-
-        .button-stack {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        @media (min-width: 480px) {
-            .button-stack { grid-template-columns: 1fr 1fr; }
-        }
-
-        button {
-            appearance: none;
-            border: none;
-            border-radius: 12px;
-            padding: 14px 20px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.1s, background-color 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        button:active { transform: scale(0.98); }
-
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-secondary { background: #f1f5f9; color: var(--text); }
-        .btn-success { background: var(--success); color: white; width: 100%; margin-top: 12px; }
-
-        .status-pill {
-            text-align: center;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 500;
-            margin-top: 16px;
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        :root { --p: #6366f1; --bg: #f8fafc; --txt: #1e293b; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--txt); padding: 20px; display: flex; justify-content: center; }
+        .app { width: 100%; max-width: 500px; }
+        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        input, textarea, button { width: 100%; border-radius: 10px; border: 1px solid #ddd; padding: 12px; box-sizing: border-box; font-size: 16px; margin-bottom: 10px; }
+        button { background: var(--p); color: white; border: none; font-weight: bold; cursor: pointer; }
+        button.sec { background: #f1f5f9; color: var(--txt); }
+        textarea { height: 250px; font-family: monospace; resize: none; }
+        .status { padding: 10px; border-radius: 8px; text-align: center; display: none; font-size: 14px; }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <header>
-        <h1>Personal Journal</h1>
-        <p style="color: var(--text-light); font-size: 14px;">Twoje dane, Twoje klucze, pełna prywatność.</p>
-    </header>
-
+<div class="app">
     <div class="card">
-        <div class="input-group">
-            <label>Hasło Szyfrujące</label>
-            <input type="password" id="password" placeholder="Wprowadź klucz...">
-        </div>
-        
-        <div class="input-group">
-            <label>Plik Pamiętnika (.json)</label>
-            <input type="file" id="fileInput" accept=".json">
-        </div>
-
-        <div class="button-stack">
-            <button class="btn-secondary" onclick="decryptData()">🔓 Odszyfruj</button>
-            <button class="btn-secondary" onclick="addNewEntry()">📅 Nowy Wpis</button>
+        <label>Hasło:</label>
+        <input type="password" id="pass" placeholder="Twoje tajne hasło">
+        <label>Plik:</label>
+        <input type="file" id="file" accept=".json">
+        <div style="display: flex; gap: 10px;">
+            <button class="sec" onclick="decrypt()">🔓 Otwórz</button>
+            <button class="sec" onclick="addDate()">📅 Data</button>
         </div>
     </div>
 
-    <div class="card" style="padding-top: 8px;">
-        <textarea id="diaryContent" placeholder="Zacznij pisać tutaj... Twoje słowa są bezpieczne."></textarea>
-        <button class="btn-success" onclick="encryptAndSave()">💾 Szyfruj i Pobierz</button>
-        <div id="status" class="status-pill"></div>
+    <div class="card">
+        <textarea id="content" placeholder="Tu wpisz tekst..."></textarea>
+        <button onclick="encrypt()">🔒 Zaszyfruj i pobierz</button>
+        <div id="msg" class="status"></div>
     </div>
 </div>
 
 <script>
-    const ITERATIONS = 100000;
-    const ALGO = 'AES-GCM';
+    const ITER = 100000;
 
-    function showStatus(msg, type) {
-        const s = document.getElementById('status');
-        s.innerText = msg;
-        s.style.display = "block";
-        s.style.backgroundColor = type === "success" ? "#d1fae5" : "#fee2e2";
-        s.style.color = type === "success" ? var(--success) : var(--error);
-        setTimeout(() => { s.style.display = "none"; }, 4000);
+    function log(m, success) {
+        const e = document.getElementById('msg');
+        e.innerText = m;
+        e.style.display = 'block';
+        e.style.background = success ? '#d1fae5' : '#fee2e2';
+        e.style.color = success ? '#065f46' : '#991b1b';
     }
 
-    function addNewEntry() {
-        const area = document.getElementById('diaryContent');
-        const now = new Date();
-        const dateStr = now.toLocaleDateString('pl-PL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        const timeStr = now.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
-        const header = `\n--- ${dateStr}, ${timeStr} ---\n`;
-        area.value = header + area.value;
-        area.focus();
-        area.setSelectionRange(header.length, header.length);
+    function addDate() {
+        const area = document.getElementById('content');
+        const d = new Date().toLocaleString('pl-PL');
+        area.value = `\n--- ${d} ---\n` + area.value;
     }
 
-    async function deriveKey(password, salt) {
-        const encoder = new TextEncoder();
-        const baseKey = await crypto.subtle.importKey('raw', encoder.encode(password), 'PBKDF2', false, ['deriveKey']);
+    async function getKey(pw, salt) {
+        const enc = new TextEncoder();
+        const bKey = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
         return crypto.subtle.deriveKey(
-            { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
-            baseKey, { name: ALGO, length: 256 }, false, ['encrypt', 'decrypt']
+            { name: 'PBKDF2', salt, iterations: ITER, hash: 'SHA-256' },
+            bKey, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']
         );
     }
 
-    async function encryptAndSave() {
-        const pass = document.getElementById('password').value;
-        const text = document.getElementById('diaryContent').value;
-        if (!pass || !text) return alert("Wprowadź hasło i treść!");
+    async function encrypt() {
+        try {
+            const pw = document.getElementById('pass').value;
+            const text = document.getElementById('content').value;
+            if(!pw || !text) return alert("Brak hasła lub treści");
 
-        const salt = crypto.getRandomValues(new Uint8Array(16));
-        const iv = crypto.getRandomValues(new Uint8Array(12));
-        const key = await deriveKey(pass, salt);
-        const encrypted = await crypto.subtle.encrypt({ name: ALGO, iv }, key, new TextEncoder().encode(text));
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await getKey(pw, salt);
+            const cipher = await crypto.subtle.encrypt({name: 'AES-GCM', iv}, key, new TextEncoder().encode(text));
 
-        const result = {
-            salt: btoa(String.fromCharCode(...salt)),
-            iv: btoa(String.fromCharCode(...iv)),
-            data: btoa(String.fromCharCode(...new Uint8Array(encrypted)))
-        };
+            const out = {
+                s: btoa(String.fromCharCode(...salt)),
+                i: btoa(String.fromCharCode(...iv)),
+                d: btoa(String.fromCharCode(...new Uint8Array(cipher)))
+            };
 
-        const blob = new Blob([JSON.stringify(result)], { type: 'application/json' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `pamiętnik_${new Date().toISOString().slice(0,10)}.json`;
-        a.click();
-        showStatus("Zaszyfrowano i zapisano!", "success");
+            const blob = new Blob([JSON.stringify(out)], {type: 'application/json'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'pamietnik.json';
+            a.click();
+            log("Zapisano!", true);
+        } catch(e) { log("Błąd szyfrowania", false); }
     }
 
-    async function decryptData() {
-        const pass = document.getElementById('password').value;
-        const fileIn = document.getElementById('fileInput');
-        if (!pass || !fileIn.files[0]) return alert("Podaj hasło i wybierz plik!");
-
+    async function decrypt() {
         try {
-            const rawData = JSON.parse(await fileIn.files[0].text());
-            const salt = new Uint8Array(atob(rawData.salt).split('').map(c => c.charCodeAt(0)));
-            const iv = new Uint8Array(atob(rawData.iv).split('').map(c => c.charCodeAt(0)));
-            const data = new Uint8Array(atob(rawData.data).split('').map(c => c.charCodeAt(0)));
+            const pw = document.getElementById('pass').value;
+            const file = document.getElementById('file').files[0];
+            if(!pw || !file) return alert("Podaj hasło i plik");
 
-            const key = await deriveKey(pass, salt);
-            const decrypted = await crypto.subtle.decrypt({ name: ALGO, iv }, key, data);
+            const raw = JSON.parse(await file.text());
+            const salt = new Uint8Array(atob(raw.s).split('').map(c => c.charCodeAt(0)));
+            const iv = new Uint8Array(atob(raw.i).split('').map(c => c.charCodeAt(0)));
+            const data = new Uint8Array(atob(raw.d).split('').map(c => c.charCodeAt(0)));
 
-            document.getElementById('diaryContent').value = new TextDecoder().decode(decrypted);
-            showStatus("Odszyfrowano poprawnie!", "success");
-        } catch (e) {
-            showStatus("Błąd: Niepoprawne hasło!", "error");
-        }
+            const key = await getKey(pw, salt);
+            const dec = await crypto.subtle.decrypt({name: 'AES-GCM', iv}, key, data);
+
+            document.getElementById('content').value = new TextDecoder().decode(dec);
+            log("Odszyfrowano!", true);
+        } catch(e) { log("Błędne hasło!", false); }
     }
 </script>
-
 </body>
 </html>
