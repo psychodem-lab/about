@@ -4,58 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pamiętnik Binarny</title>
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'%3E%3Cpath d='M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7c0-2.757-2.243-5-5-5zm-3 5c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z'/%3E%3C/svg%3E" type="image/svg+xml">
+
     <style>
-        :root { --p: #6366f1; --bg: #f8fafc; --txt: #1e293b; }
-        body { font-family: sans-serif; background: var(--bg); color: var(--txt); padding: 15px; display: flex; justify-content: center; }
-        .app { width: 100%; max-width: 500px; }
-        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 12px; }
-        input, textarea, button { width: 100%; border-radius: 10px; border: 1px solid #ddd; padding: 12px; box-sizing: border-box; font-size: 16px; margin-bottom: 8px; }
+        /* Zmienne globalne i domyślny jasny motyw */
+        :root { 
+            --p: #6366f1; 
+            --bg: #f8fafc; 
+            --card-bg: #ffffff;
+            --txt: #1e293b; 
+            --txt-muted: #64748b;
+            --border: #e2e8f0;
+            --input-bg: #ffffff;
+        }
+
+        /* [3] Tryb Ciemny (Dark Mode) - reaguje na ustawienia systemu */
+        @media (prefers-color-scheme: dark) {
+            :root { 
+                --bg: #0f172a; 
+                --card-bg: #1e293b;
+                --txt: #f8fafc; 
+                --txt-muted: #94a3b8;
+                --border: #334155;
+                --input-bg: #0f172a;
+            }
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: var(--bg); 
+            color: var(--txt); 
+            padding: 15px; 
+            display: flex; 
+            justify-content: center; 
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .app { width: 100%; max-width: 500px; transition: all 0.3s ease; }
+        
+        .card { 
+            background: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            margin-bottom: 12px; 
+            transition: background-color 0.3s;
+        }
+        
+        label { display: block; font-size: 13px; font-weight: 600; color: var(--txt-muted); margin-bottom: 4px; text-transform: uppercase; }
+        
+        input, textarea, button { 
+            width: 100%; 
+            border-radius: 10px; 
+            border: 1px solid var(--border); 
+            background: var(--input-bg);
+            color: var(--txt);
+            padding: 12px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+            margin-bottom: 12px; 
+            outline: none;
+            transition: border-color 0.2s, background-color 0.3s, color 0.3s;
+        }
+        
+        input:focus, textarea:focus { border-color: var(--p); }
+        
         button { background: var(--p); color: white; border: none; font-weight: bold; cursor: pointer; height: 50px; }
+        button:active { transform: scale(0.98); }
+        
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        textarea { height: 300px; font-family: monospace; resize: none; margin-top: 8px; }
-        .status { padding: 10px; border-radius: 8px; text-align: center; display: none; font-size: 14px; margin-top: 8px; }
+        
+        textarea { height: 350px; font-family: "SF Mono", monospace; resize: none; margin-top: 4px; line-height: 1.5; }
+        
+        .status { padding: 10px; border-radius: 8px; text-align: center; display: none; font-size: 14px; margin-top: 8px; font-weight: 500; }
+
+        /* [5] Pasek postępu czytania/pisania */
+        .progress-wrapper { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 10px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--p); width: 0%; transition: width 0.1s ease-out; }
+
+        /* [30] Tryb Skupienia (Zen Mode) - CSS logic */
+        body.zen-active { padding: 0; }
+        body.zen-active .controls-panel { display: none; }
+        body.zen-active .app { max-width: 800px; height: 100vh; display: flex; flex-direction: column; }
+        body.zen-active .card.editor-card { flex-grow: 1; margin: 0; border-radius: 0; box-shadow: none; display: flex; flex-direction: column; padding: 10px; }
+        body.zen-active textarea { flex-grow: 1; border: none; font-size: 18px; padding: 15px; margin-bottom: 0; }
+        body.zen-active .save-btn { display: none; } /* Opcjonalnie ukrywamy przycisk zapisu w trybie Zen */
+
+        /* Pływający przycisk Zen */
+        .zen-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: var(--p);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            border: none;
+            transition: opacity 0.3s;
+        }
+        body.zen-active .zen-btn { opacity: 0.4; }
+        body.zen-active .zen-btn:hover { opacity: 1; }
     </style>
 </head>
 <body>
 
 <div class="app">
-    <div class="card">
-        <label>Klucz i Nazwa:</label>
-        <input type="password" id="pass" placeholder="Hasło (klucz)...">
-        <input type="text" id="fileName" placeholder="Nazwa pliku (opcjonalnie)">
+    <div class="card controls-panel">
+        <label>Klucz Szyfrujący</label>
+        <input type="password" id="pass" placeholder="Silne hasło...">
         
-        <label>Wczytaj plik (.enc):</label>
+        <label>Nazwa pliku (opcjonalnie)</label>
+        <input type="text" id="fileName" placeholder="np. dziennik_wiosna">
+        
+        <label>Wczytaj plik (.enc)</label>
         <input type="file" id="file" accept=".enc">
         
         <div class="grid">
-            <button style="background:#64748b" onclick="decrypt()">🔓 Otwórz</button>
-            <button style="background:#64748b" onclick="addDate()">📅 +Data</button>
+            <button style="background: var(--txt-muted);" onclick="decrypt()">🔓 Otwórz</button>
+            <button style="background: var(--txt-muted);" onclick="addDate()">📅 Wstaw Datę</button>
         </div>
     </div>
 
-    <div class="card">
-        <textarea id="content" placeholder="Treść pamiętnika..."></textarea>
-        <button onclick="encrypt()">🔒 Szyfruj i Pobierz (.enc)</button>
+    <div class="card editor-card">
+        <div class="progress-wrapper">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        
+        <textarea id="content" placeholder="Twój umysł to bezpieczne miejsce. Zacznij pisać..."></textarea>
+        
+        <button class="save-btn" onclick="encrypt()">🔒 Zaszyfruj i Pobierz (.enc)</button>
         <div id="msg" class="status"></div>
     </div>
 </div>
 
+<button class="zen-btn" id="zenToggleBtn" onclick="toggleZen()" title="Tryb Skupienia">🧘</button>
+
 <script>
     const ITER = 100000;
 
+    // [5] Logika paska postępu
+    const contentArea = document.getElementById('content');
+    const progressBar = document.getElementById('progressBar');
+
+    function updateProgress() {
+        // Wzór na procent przewinięcia tekstu
+        const scrollTop = contentArea.scrollTop;
+        const scrollHeight = contentArea.scrollHeight - contentArea.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        progressBar.style.width = progress + '%';
+    }
+
+    contentArea.addEventListener('scroll', updateProgress);
+    contentArea.addEventListener('input', updateProgress); // Aktualizuje również przy wpisywaniu nowych linii
+
+    // [30] Logika Trybu Skupienia
+    function toggleZen() {
+        const body = document.body;
+        const btn = document.getElementById('zenToggleBtn');
+        body.classList.toggle('zen-active');
+        
+        if (body.classList.contains('zen-active')) {
+            btn.innerText = '📖'; // Zmiana ikony na książkę (powrót)
+            contentArea.focus(); // Automatycznie aktywuje kursor w polu tekstowym
+        } else {
+            btn.innerText = '🧘'; // Ikona Zen
+        }
+    }
+
+    // Wyświetlanie komunikatów
     function log(m, success) {
         const e = document.getElementById('msg');
-        e.innerText = m; e.style.display = 'block';
-        e.style.background = success ? '#d1fae5' : '#fee2e2';
-        e.style.color = success ? '#065f46' : '#991b1b';
+        e.innerText = m; 
+        e.style.display = 'block';
+        // Dostosowanie kolorów z uwzględnieniem trybu ciemnego jest obsługiwane statycznie tutaj, 
+        // ale używamy bezpiecznych kontrastowo barw.
+        e.style.background = success ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)';
+        e.style.color = success ? '#10b981' : '#ef4444';
+        setTimeout(() => { e.style.display = 'none'; }, 4000);
     }
 
     function addDate() {
-        const area = document.getElementById('content');
         const d = new Date().toLocaleString('pl-PL');
-        area.value = `--- ${d} ---\n` + area.value;
+        contentArea.value = `\n--- ${d} ---\n` + contentArea.value;
+        contentArea.focus();
+        contentArea.setSelectionRange(0, 0); // Przesuwa kursor na samą górę
+        updateProgress();
     }
 
+    // --- Logika Kryptograficzna AES-GCM (Bez zmian, bezpieczna i binarna) ---
     async function getKey(pw, salt) {
         const enc = new TextEncoder();
         const bKey = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
@@ -68,16 +214,17 @@
     async function encrypt() {
         try {
             const pw = document.getElementById('pass').value;
-            const text = document.getElementById('content').value;
+            const text = contentArea.value;
             let name = document.getElementById('fileName').value || `wpis_${new Date().toISOString().slice(0,10)}`;
-            if(!pw || !text) return alert("Brak danych!");
+            
+            if(!pw) return alert("Musisz podać klucz szyfrujący!");
+            if(!text) return alert("Nie masz nic do zapisania.");
 
             const salt = crypto.getRandomValues(new Uint8Array(16));
             const iv = crypto.getRandomValues(new Uint8Array(12));
             const key = await getKey(pw, salt);
             const cipher = await crypto.subtle.encrypt({name: 'AES-GCM', iv}, key, new TextEncoder().encode(text));
 
-            // Łączymy wszystko w jeden ciąg bajtów (Binary Packing)
             const combined = new Uint8Array(salt.length + iv.length + cipher.byteLength);
             combined.set(salt, 0);
             combined.set(iv, salt.length);
@@ -88,20 +235,20 @@
             a.href = URL.createObjectURL(blob);
             a.download = name + '.enc';
             a.click();
-            log("Zapisano jako " + name + ".enc", true);
-        } catch(e) { log("Błąd zapisu", false); }
+            log("Pomyślnie zaszyfrowano i zapisano!", true);
+        } catch(e) { log("Krytyczny błąd zapisu.", false); }
     }
 
     async function decrypt() {
         try {
             const pw = document.getElementById('pass').value;
             const file = document.getElementById('file').files[0];
-            if(!pw || !file) return alert("Podaj hasło i plik");
+            
+            if(!pw || !file) return alert("Podaj klucz i wybierz plik .enc");
 
             const buf = await file.arrayBuffer();
             const fullData = new Uint8Array(buf);
 
-            // Wyciągamy bajty z konkretnych pozycji
             const salt = fullData.slice(0, 16);
             const iv = fullData.slice(16, 28);
             const data = fullData.slice(28);
@@ -109,9 +256,10 @@
             const key = await getKey(pw, salt);
             const dec = await crypto.subtle.decrypt({name: 'AES-GCM', iv}, key, data);
 
-            document.getElementById('content').value = new TextDecoder().decode(dec);
-            log("Odszyfrowano!", true);
-        } catch(e) { log("Błędne hasło lub plik!", false); }
+            contentArea.value = new TextDecoder().decode(dec);
+            updateProgress();
+            log("Odszyfrowano pomyślnie!", true);
+        } catch(e) { log("Błąd! Niepoprawny klucz lub uszkodzony plik.", false); }
     }
 </script>
 </body>
