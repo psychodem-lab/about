@@ -2,7 +2,7 @@
   "name": "Kryptograficzny Pamiętnik",
   "short_name": "Pamiętnik",
   "description": "Prywatny, binarny dziennik z szyfrowaniem AES-GCM",
-  "start_url": "index.html",
+  "start_url": "pamiec.html",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#6366f1",
