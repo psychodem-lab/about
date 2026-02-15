@@ -1,6 +1,6 @@
 const CACHE_NAME = 'pamietnik-v1';
 const ASSETS = [
-  'index.html',
+  'pamiec.html',
   'manifest.json'
 ];
 
